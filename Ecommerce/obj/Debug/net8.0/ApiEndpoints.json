@@ -52,6 +52,74 @@
     ]
   },
   {
+    "ContainingType": "Ecommerce.Controllers.SeguridadUsersController",
+    "Method": "RegisterCompany",
+    "RelativePath": "api/SeguridadUsers/registerCompany",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Ecommerce.DTOs.Request.RegisterCompanyRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Ecommerce.DTOs.Response.RegisterCompanyResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.SeguridadUsersController",
+    "Method": "UpdateCompany",
+    "RelativePath": "api/SeguridadUsers/updateCompany/{empresaId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empresaId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "empresaDto",
+        "Type": "Ecommerce.DTOs.Request.UpdateCompanyRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Ecommerce.Controllers.SeguridadUsersController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/SeguridadUsers/updateUser/{userId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "userDto",
+        "Type": "Ecommerce.DTOs.Request.UpdateUserRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Ecommerce.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",

@@ -20,18 +20,44 @@ namespace Ecommerce.Repositories
         public DbSet<SeguridadUsersOptions> SeguridadUsersOptions { get; set; }
         public DbSet<SeguridadUsersOptionsPermissions> SeguridadUsersOptionsPermissions { get; set; }
         public DbSet<SeguridadUsersProfiles> SeguridadUsersProfiles { get; set; }
+        public DbSet<SeguridadEmpresas> SeguridadEmpresas { get; set; }
+        public DbSet<SeguridadEmpresasUsers> SeguridadEmpresasUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configuración de la tabla SeguridadUsers
             modelBuilder.Entity<SeguridadUsers>()
-                .ToTable("Users", "Seguridad"); // Ajusta según tu esquema
+                .ToTable("Users", "Seguridad");
 
+            // Configuración de la tabla SeguridadOptions
             modelBuilder.Entity<SeguridadOptions>()
-                .ToTable("SeguridadOptions");
+                .ToTable("SeguridadOptions", "Seguridad");
 
-            // Configuración adicional de otras entidades
+            // Configuración de la tabla SeguridadEmpresas
+            modelBuilder.Entity<SeguridadEmpresas>()
+                .ToTable("Empresas", "Seguridad");
+
+            // Configuración de la tabla SeguridadEmpresasUsers
+            modelBuilder.Entity<SeguridadEmpresasUsers>()
+                .ToTable("Empresas_Users", "Seguridad")
+                .HasKey(e => e.EmpresaUserId); // Define la clave primaria
+
+            // Configuración de la relación entre SeguridadEmpresasUsers y SeguridadEmpresas
+            modelBuilder.Entity<SeguridadEmpresasUsers>()
+                .HasOne(eu => eu.SeguridadEmpresas)
+                .WithMany(e => e.SeguridadEmpresasUsers) // Configura la navegación inversa
+                .HasForeignKey(eu => eu.EmpresaId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configuración de la relación entre SeguridadEmpresasUsers y SeguridadUsers
+            modelBuilder.Entity<SeguridadEmpresasUsers>()
+                .HasOne(eu => eu.SeguridadUsers)
+                .WithMany(u => u.SeguridadEmpresasUsers) // Configura la navegación inversa
+                .HasForeignKey(eu => eu.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }
